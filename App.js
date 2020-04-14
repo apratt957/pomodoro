@@ -4,15 +4,26 @@ import { useInterval } from './hooks/useInterval';
 import moment from 'moment';
 
 export default function App() {
-  const [sessionVal, setSessionVal] = useState(25);
+  const [sessionVal, setSessionVal] = useState(0.1);
+  const [breakVal, setBreakVal] = useState(0.3);
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
+  const [working, setWorking] = useState(true);
 
   useInterval(() => setTime(time - 1000), active ? 1000 : null);
 
+  // useEffect(() => {
+  //   setTime(sessionVal * 60 * 1000);
+  // }, [sessionVal]);
+
   useEffect(() => {
-    setTime(sessionVal * 60 * 1000);
-  }, [sessionVal]);
+    if (time === 0) {
+      setWorking(!working);
+      working === false
+        ? setTime(sessionVal * 60 * 1000)
+        : setTime(breakVal * 60 * 1000);
+    }
+  });
 
   const activeSwitch = () => setActive(!active);
 
@@ -23,7 +34,10 @@ export default function App() {
           .utc(moment.duration(time, 'ms').asMilliseconds())
           .format('mm:ss')}
       </Text>
-      <Button title="Start" onPress={() => activeSwitch()} />
+      <Button
+        title={active ? 'Stop' : 'Start'}
+        onPress={() => activeSwitch()}
+      />
     </View>
   );
 }
