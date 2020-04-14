@@ -18,7 +18,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>{time}</Text>
+      <Text>
+        {moment
+          .utc(moment.duration(time, 'ms').asMilliseconds())
+          .format('mm:ss')}
+      </Text>
       <Button title="Start" onPress={() => activeSwitch()} />
     </View>
   );
