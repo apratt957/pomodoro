@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useInterval } from './hooks/useInterval';
+import Timer from './components/Timer';
 import moment from 'moment';
 
 export default function App() {
-  const [sessionVal, setSessionVal] = useState(0.1);
-  const [breakVal, setBreakVal] = useState(0.3);
+  const [sessionVal, setSessionVal] = useState(25);
+  const [breakVal, setBreakVal] = useState(5);
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
   const [working, setWorking] = useState(true);
 
   useInterval(() => setTime(time - 1000), active ? 1000 : null);
-
-  // useEffect(() => {
-  //   setTime(sessionVal * 60 * 1000);
-  // }, [sessionVal]);
 
   useEffect(() => {
     if (time === 0) {
@@ -29,11 +26,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>
-        {moment
-          .utc(moment.duration(time, 'ms').asMilliseconds())
-          .format('mm:ss')}
-      </Text>
+      <Timer time={time} />
       <Button
         title={active ? 'Stop' : 'Start'}
         onPress={() => activeSwitch()}
