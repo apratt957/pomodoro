@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import { useInterval } from './hooks/useInterval';
 import Timer from './components/Timer';
+import TimeAdjusters from './components/TimeAdjusters';
 
 export default function App() {
   const [sessionVal, setSessionVal] = useState(0.1);
@@ -23,8 +24,10 @@ export default function App() {
 
   const activeSwitch = () => setActive(!active);
 
-  const resetTime = () =>
+  const resetTime = () => {
     working ? setTime(sessionVal * 60 * 1000) : setTime(breakVal * 60 * 1000);
+    setActive(!active);
+  };
 
   return (
     <View style={styles.container}>
@@ -34,6 +37,7 @@ export default function App() {
         onPress={() => activeSwitch()}
       />
       <Button title="Reset" onPress={() => resetTime()} />
+      <TimeAdjusters />
     </View>
   );
 }
