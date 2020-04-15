@@ -5,11 +5,19 @@ import moment from 'moment';
 export default function Timer({ time }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.time}>
-        {moment
-          .utc(moment.duration(time, 'ms').asMilliseconds())
-          .format('mm:ss')}
-      </Text>
+      {time < 600000 ? (
+        <Text style={styles.time}>
+          {moment
+            .utc(moment.duration(time, 'ms').asMilliseconds())
+            .format('m:ss')}
+        </Text>
+      ) : (
+        <Text style={styles.time}>
+          {moment
+            .utc(moment.duration(time, 'ms').asMilliseconds())
+            .format('mm:ss')}
+        </Text>
+      )}
     </View>
   );
 }
