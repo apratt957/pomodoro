@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function TimeAdjusters({
   sessionVal,
@@ -13,31 +13,31 @@ export default function TimeAdjusters({
     <View style={styles.container}>
       <View style={styles.controls}>
         <Text>Work</Text>
-        <TouchableHighlight onPress={() => incrementSessionTime()}>
+        <TouchableOpacity onPress={() => incrementSessionTime()}>
           <View>
-            <Text style={{ fontSize: 30 }}>&#8593;</Text>
+            <Text style={styles.controlArrows}>&#8593;</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
         <Text>{sessionVal}</Text>
-        <TouchableHighlight onPress={() => decrementSessionTime()}>
+        <TouchableOpacity onPress={() => decrementSessionTime()}>
           <View>
-            <Text style={{ fontSize: 30 }}>&#8595;</Text>
+            <Text style={styles.controlArrows}>&#8595;</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
       <View style={styles.controls}>
         <Text>Break</Text>
-        <TouchableHighlight onPress={() => incrementBreakTime()}>
+        <TouchableOpacity onPress={() => incrementBreakTime()}>
           <View>
-            <Text style={{ fontSize: 30 }}>&#8593;</Text>
+            <Text style={styles.controlArrows}>&#8593;</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
         <Text>{breakVal}</Text>
-        <TouchableHighlight onPress={() => decrementBreakTime()}>
+        <TouchableOpacity onPress={() => decrementBreakTime()}>
           <View>
-            <Text style={{ fontSize: 30 }}>&#8595;</Text>
+            <Text style={styles.controlArrows}>&#8595;</Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -48,8 +48,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginBottom: 200,
   },
   controls: {
     alignItems: 'center',
+  },
+  controlText: {},
+  controlArrows: {
+    fontSize: 40,
   },
 });
