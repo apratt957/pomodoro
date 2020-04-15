@@ -48,13 +48,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 200,
+    marginBottom: 150,
+    marginTop: 30,
   },
   controls: {
     alignItems: 'center',
   },
   controlText: {
-    fontSize: 20,
+    fontSize: 30,
+    fontFamily: 'ConcertOne',
   },
   controlArrows: {
     fontSize: 40,

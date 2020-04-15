@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Button, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 import { useInterval } from './hooks/useInterval';
 import { useFonts } from '@use-expo/font';
 import Timer from './components/Timer';
@@ -74,10 +75,16 @@ export default function App() {
           decrementBreakTime={decrementBreakTime}
         />
         <Button
+          titleStyle={styles.button}
           title={active ? 'Pause' : 'Start'}
           onPress={() => activeSwitch()}
         />
-        <Button title="Reset" onPress={() => resetTime()} />
+        <Button
+          titleStyle={styles.button}
+          type="clear"
+          title="Reset"
+          onPress={() => resetTime()}
+        />
       </View>
     );
   }
@@ -94,5 +101,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     fontSize: 40,
     fontFamily: 'ConcertOne',
+  },
+  button: {
+    fontFamily: 'ConcertOne',
+    fontSize: 30,
+    marginBottom: 10,
   },
 });
