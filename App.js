@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { useInterval } from './hooks/useInterval';
 import Timer from './components/Timer';
-import moment from 'moment';
 
 export default function App() {
   const [sessionVal, setSessionVal] = useState(0.1);
