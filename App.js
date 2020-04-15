@@ -50,11 +50,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Timer time={time} />
-      <Button
-        title={active ? 'Pause' : 'Start'}
-        onPress={() => activeSwitch()}
-      />
-      <Button title="Reset" onPress={() => resetTime()} />
       <TimeAdjusters
         sessionVal={sessionVal}
         breakVal={breakVal}
@@ -63,6 +58,11 @@ export default function App() {
         incrementBreakTime={incrementBreakTime}
         decrementBreakTime={decrementBreakTime}
       />
+      <Button
+        title={active ? 'Pause' : 'Start'}
+        onPress={() => activeSwitch()}
+      />
+      <Button title="Reset" onPress={() => resetTime()} />
     </View>
   );
 }
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
 });
