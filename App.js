@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Button, Text } from 'react-native';
 import { useInterval } from './hooks/useInterval';
 import Timer from './components/Timer';
 import TimeAdjusters from './components/TimeAdjusters';
@@ -14,19 +14,28 @@ export default function App() {
   useInterval(() => setTime(time - 1000), active ? 1000 : null);
 
   useEffect(() => {
+    setTime(sessionVal * 60 * 1000);
+  }, [sessionVal]);
+
+  useEffect(() => {
     if (time === 0) {
+      working === true
+        ? setTime(breakVal * 60 * 1000)
+        : setTime(sessionVal * 60 * 1000);
       setWorking(!working);
-      working === false
-        ? setTime(sessionVal * 60 * 1000)
-        : setTime(breakVal * 60 * 1000);
     }
   });
 
   const activeSwitch = () => setActive(!active);
 
   const resetTime = () => {
-    working ? setTime(sessionVal * 60 * 1000) : setTime(breakVal * 60 * 1000);
-    setActive(!active);
+    setTime(sessionVal * 60 * 1000);
+    if (active) setActive(!active);
+    setWorking(true);
+  };
+
+  const incrementTime = () => {
+    setSessionVal((prevVal) => prevVal + 1);
   };
 
   return (
@@ -37,7 +46,12 @@ export default function App() {
         onPress={() => activeSwitch()}
       />
       <Button title="Reset" onPress={() => resetTime()} />
-      <TimeAdjusters />
+      <TimeAdjusters
+        sessionVal={sessionVal}
+        breakVal={breakVal}
+        incrementTime={incrementTime}
+      />
+      <Text>{time}</Text>
     </View>
   );
 }
