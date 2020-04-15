@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 100,
+    fontFamily: 'Dosis',
   },
 });

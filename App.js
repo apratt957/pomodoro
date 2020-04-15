@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
 import { useInterval } from './hooks/useInterval';
+import { useFonts } from '@use-expo/font';
 import Timer from './components/Timer';
 import TimeAdjusters from './components/TimeAdjusters';
 
@@ -10,6 +11,12 @@ export default function App() {
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
   const [working, setWorking] = useState(true);
+
+  let [fontsLoaded] = useFonts({
+    BalooBold: require('./fonts/BalooTammudu2-Bold.ttf'),
+    ConcertOne: require('./fonts/ConcertOne-Regular.ttf'),
+    Dosis: require('./fonts/Dosis-VariableFont_wght.ttf'),
+  });
 
   useInterval(() => setTime(time - 1000), active ? 1000 : null);
 
@@ -47,40 +54,45 @@ export default function App() {
     if (breakVal > 1) setBreakVal((prevVal) => prevVal - 1);
   };
 
-  return (
-    <View style={styles.container}>
-      {working ? (
-        <Text style={styles.title}>WORK</Text>
-      ) : (
-        <Text style={styles.title}>PLAY</Text>
-      )}
-      <Timer time={time} />
-      <TimeAdjusters
-        sessionVal={sessionVal}
-        breakVal={breakVal}
-        incrementSessionTime={incrementSessionTime}
-        decrementSessionTime={decrementSessionTime}
-        incrementBreakTime={incrementBreakTime}
-        decrementBreakTime={decrementBreakTime}
-      />
-      <Button
-        title={active ? 'Pause' : 'Start'}
-        onPress={() => activeSwitch()}
-      />
-      <Button title="Reset" onPress={() => resetTime()} />
-    </View>
-  );
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
+  } else {
+    return (
+      <View style={styles.container}>
+        {working ? (
+          <Text style={styles.title}>Time To Work!</Text>
+        ) : (
+          <Text style={styles.title}>Time To Rest!</Text>
+        )}
+        <Timer time={time} />
+        <TimeAdjusters
+          sessionVal={sessionVal}
+          breakVal={breakVal}
+          incrementSessionTime={incrementSessionTime}
+          decrementSessionTime={decrementSessionTime}
+          incrementBreakTime={incrementBreakTime}
+          decrementBreakTime={decrementBreakTime}
+        />
+        <Button
+          title={active ? 'Pause' : 'Start'}
+          onPress={() => activeSwitch()}
+        />
+        <Button title="Reset" onPress={() => resetTime()} />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
     alignSelf: 'center',
     marginBottom: 20,
+    fontSize: 40,
+    fontFamily: 'ConcertOne',
   },
 });

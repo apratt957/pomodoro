@@ -12,13 +12,13 @@ export default function TimeAdjusters({
   return (
     <View style={styles.container}>
       <View style={styles.controls}>
-        <Text>Work</Text>
+        <Text style={styles.controlText}>Work</Text>
         <TouchableOpacity onPress={() => incrementSessionTime()}>
           <View>
             <Text style={styles.controlArrows}>&#8593;</Text>
           </View>
         </TouchableOpacity>
-        <Text>{sessionVal}</Text>
+        <Text style={styles.controlText}>{sessionVal}</Text>
         <TouchableOpacity onPress={() => decrementSessionTime()}>
           <View>
             <Text style={styles.controlArrows}>&#8595;</Text>
@@ -26,13 +26,13 @@ export default function TimeAdjusters({
         </TouchableOpacity>
       </View>
       <View style={styles.controls}>
-        <Text>Break</Text>
+        <Text style={styles.controlText}>Break</Text>
         <TouchableOpacity onPress={() => incrementBreakTime()}>
           <View>
             <Text style={styles.controlArrows}>&#8593;</Text>
           </View>
         </TouchableOpacity>
-        <Text>{breakVal}</Text>
+        <Text style={styles.controlText}>{breakVal}</Text>
         <TouchableOpacity onPress={() => decrementBreakTime()}>
           <View>
             <Text style={styles.controlArrows}>&#8595;</Text>
@@ -53,7 +53,9 @@ const styles = StyleSheet.create({
   controls: {
     alignItems: 'center',
   },
-  controlText: {},
+  controlText: {
+    fontSize: 20,
+  },
   controlArrows: {
     fontSize: 40,
   },
