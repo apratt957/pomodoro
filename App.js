@@ -5,7 +5,7 @@ import Timer from './components/Timer';
 import TimeAdjusters from './components/TimeAdjusters';
 
 export default function App() {
-  const [sessionVal, setSessionVal] = useState(0.1);
+  const [sessionVal, setSessionVal] = useState(1);
   const [breakVal, setBreakVal] = useState(5);
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
@@ -34,8 +34,17 @@ export default function App() {
     setWorking(true);
   };
 
-  const incrementTime = () => {
-    setSessionVal((prevVal) => prevVal + 1);
+  const incrementSessionTime = () => {
+    if (sessionVal < 59) setSessionVal((prevVal) => prevVal + 1);
+  };
+  const decrementSessionTime = () => {
+    if (sessionVal > 1) setSessionVal((prevVal) => prevVal - 1);
+  };
+  const incrementBreakTime = () => {
+    if (breakVal < 59) setBreakVal((prevVal) => prevVal + 1);
+  };
+  const decrementBreakTime = () => {
+    if (breakVal > 1) setBreakVal((prevVal) => prevVal - 1);
   };
 
   return (
@@ -49,9 +58,11 @@ export default function App() {
       <TimeAdjusters
         sessionVal={sessionVal}
         breakVal={breakVal}
-        incrementTime={incrementTime}
+        incrementSessionTime={incrementSessionTime}
+        decrementSessionTime={decrementSessionTime}
+        incrementBreakTime={incrementBreakTime}
+        decrementBreakTime={decrementBreakTime}
       />
-      <Text>{time}</Text>
     </View>
   );
 }
