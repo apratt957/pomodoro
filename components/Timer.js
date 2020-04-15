@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { useInterval } from '../hooks/useInterval';
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
 import moment from 'moment';
 
 export default function Timer({ time }) {
