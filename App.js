@@ -49,6 +49,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      {working ? (
+        <Text style={styles.title}>WORK</Text>
+      ) : (
+        <Text style={styles.title}>PLAY</Text>
+      )}
       <Timer time={time} />
       <TimeAdjusters
         sessionVal={sessionVal}
@@ -73,5 +78,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // alignItems: 'center',
     justifyContent: 'center',
+  },
+  title: {
+    alignSelf: 'center',
+    marginBottom: 20,
   },
 });

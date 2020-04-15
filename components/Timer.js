@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import moment from 'moment';
 
 export default function Timer({ time }) {
   return (
     <View style={styles.container}>
-      <Text>
+      <Text style={styles.time}>
         {moment
           .utc(moment.duration(time, 'ms').asMilliseconds())
           .format('mm:ss')}
@@ -18,5 +18,8 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
+  },
+  time: {
+    fontSize: 100,
   },
 });

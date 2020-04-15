@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import moment from 'moment';
 
 export default function TimeAdjusters({
   sessionVal,
