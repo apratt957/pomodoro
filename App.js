@@ -94,7 +94,8 @@ export default function App() {
         <Button
           titleStyle={styles.startButtonText}
           containerStyle={styles.buttonContainer}
-          buttonStyle={styles.startButton}
+          // buttonStyle={styles.startButton}
+          type="clear"
           title={active ? 'Pause' : 'Start'}
           onPress={() => activeSwitch()}
         />
@@ -112,7 +113,7 @@ export default function App() {
 
 const colors = {
   red: '#E83C3C',
-  blue: '#388697',
+  blue: '#0B2033',
   yellow: '#FFE882',
   pink: '#FFE8E8',
   orange: '#FA8334',
@@ -121,10 +122,11 @@ const colors = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.pink,
+    backgroundColor: colors.blue,
     justifyContent: 'center',
   },
   title: {
+    color: colors.pink,
     fontFamily: 'ConcertOne',
     fontSize: 50,
     alignSelf: 'center',
@@ -132,6 +134,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   startButtonText: {
+    color: colors.pink,
     fontFamily: 'ConcertOne',
     fontSize: 30,
     marginBottom: 10,

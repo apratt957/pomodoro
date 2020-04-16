@@ -10,9 +10,6 @@ export default function TimeAdjusters({
   incrementBreakTime,
   decrementBreakTime,
 }) {
-  const workingImage = require('../assets/art/working.png');
-  const restingImage = require('../assets/art/resting.png');
-
   return (
     <View style={styles.container}>
       <View style={styles.controls}>
@@ -29,12 +26,6 @@ export default function TimeAdjusters({
           </View>
         </TouchableOpacity>
       </View>
-      {/* {working ? (
-        <Image source={workingImage} style={styles.image} />
-      ) : (
-        <Image source={restingImage} style={styles.image} />
-      )} */}
-
       <View style={styles.controls}>
         <Text style={styles.controlText}>Break</Text>
         <TouchableOpacity onPress={() => incrementBreakTime()}>
@@ -53,6 +44,14 @@ export default function TimeAdjusters({
   );
 }
 
+const colors = {
+  red: '#E83C3C',
+  blue: '#0B2033',
+  yellow: '#FFE882',
+  pink: '#FFE8E8',
+  orange: '#FA8334',
+};
+
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
@@ -65,10 +64,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   controlText: {
+    color: colors.pink,
     fontSize: 30,
     fontFamily: 'ConcertOne',
   },
   controlArrows: {
+    color: colors.pink,
     fontSize: 40,
   },
   image: {

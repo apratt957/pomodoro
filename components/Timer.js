@@ -22,12 +22,21 @@ export default function Timer({ time }) {
   );
 }
 
+const colors = {
+  red: '#E83C3C',
+  blue: '#0B2033',
+  yellow: '#FFE882',
+  pink: '#FFE8E8',
+  orange: '#FA8334',
+};
+
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
   },
   time: {
+    color: colors.pink,
     fontSize: 100,
     fontFamily: 'ConcertOne',
   },
