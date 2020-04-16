@@ -20,8 +20,8 @@ export default function App() {
   useInterval(() => setTime(time - 1000), active ? 1000 : null);
 
   useEffect(() => {
-    setTime(sessionVal * 60 * 1000);
-  }, [sessionVal]);
+    working ? setTime(sessionVal * 60 * 1000) : setTime(breakVal * 60 * 1000);
+  }, [sessionVal, breakVal]);
 
   useEffect(() => {
     if (time === 0) {
