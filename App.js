@@ -18,6 +18,7 @@ export default function App() {
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
   const [working, setWorking] = useState(true);
+  const [timer, setTimer] = useState(null);
 
   let [fontsLoaded] = useFonts({
     ConcertOne: require('./assets/fonts/ConcertOne-Regular.ttf'),
@@ -51,17 +52,33 @@ export default function App() {
     setWorking(true);
   };
 
+  const stopTimer = () => {
+    setTimer((prevVal) => clearTimeout(prevVal));
+  };
+
   const incrementSessionTime = () => {
-    if (sessionVal < 59) setSessionVal((prevVal) => prevVal + 1);
+    if (sessionVal < 59) {
+      setSessionVal((prevVal) => prevVal + 1);
+      setTimer(setTimeout(incrementSessionTime, 300));
+    }
   };
   const decrementSessionTime = () => {
-    if (sessionVal > 1) setSessionVal((prevVal) => prevVal - 1);
+    if (sessionVal > 1) {
+      setSessionVal((prevVal) => prevVal - 1);
+      setTimer(setTimeout(decrementSessionTime, 300));
+    }
   };
   const incrementBreakTime = () => {
-    if (breakVal < 59) setBreakVal((prevVal) => prevVal + 1);
+    if (breakVal < 59) {
+      setBreakVal((prevVal) => prevVal + 1);
+      setTimer(setTimeout(incrementBreakTime, 300));
+    }
   };
   const decrementBreakTime = () => {
-    if (breakVal > 1) setBreakVal((prevVal) => prevVal - 1);
+    if (breakVal > 1) {
+      setBreakVal((prevVal) => prevVal - 1);
+      setTimer(setTimeout(decrementBreakTime, 300));
+    }
   };
 
   if (!fontsLoaded) {
@@ -81,16 +98,15 @@ export default function App() {
         <Timer time={time} />
         {!active ? (
           <TimeAdjusters
-            working={working}
             sessionVal={sessionVal}
             breakVal={breakVal}
             incrementSessionTime={incrementSessionTime}
             decrementSessionTime={decrementSessionTime}
             incrementBreakTime={incrementBreakTime}
             decrementBreakTime={decrementBreakTime}
+            stopTimer={stopTimer}
           />
         ) : null}
-
         <Button
           titleStyle={styles.startButtonText}
           containerStyle={styles.buttonContainer}

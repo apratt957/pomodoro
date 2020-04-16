@@ -1,26 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function TimeAdjusters({
-  working,
   sessionVal,
   breakVal,
   incrementSessionTime,
   decrementSessionTime,
   incrementBreakTime,
   decrementBreakTime,
+  stopTimer,
 }) {
   return (
     <View style={styles.container}>
       <View style={styles.controls}>
         <Text style={styles.controlText}>Work</Text>
-        <TouchableOpacity onPress={() => incrementSessionTime()}>
+        <TouchableOpacity
+          onPressIn={() => incrementSessionTime()}
+          onPressOut={() => stopTimer()}
+        >
           <View>
             <Text style={styles.controlArrows}>&#8593;</Text>
           </View>
         </TouchableOpacity>
         <Text style={styles.controlText}>{sessionVal}</Text>
-        <TouchableOpacity onPress={() => decrementSessionTime()}>
+        <TouchableOpacity
+          onPressIn={() => decrementSessionTime()}
+          onPressOut={() => stopTimer()}
+        >
           <View>
             <Text style={styles.controlArrows}>&#8595;</Text>
           </View>
@@ -28,13 +34,19 @@ export default function TimeAdjusters({
       </View>
       <View style={styles.controls}>
         <Text style={styles.controlText}>Break</Text>
-        <TouchableOpacity onPress={() => incrementBreakTime()}>
+        <TouchableOpacity
+          onPressIn={() => incrementBreakTime()}
+          onPressOut={() => stopTimer()}
+        >
           <View>
             <Text style={styles.controlArrows}>&#8593;</Text>
           </View>
         </TouchableOpacity>
         <Text style={styles.controlText}>{breakVal}</Text>
-        <TouchableOpacity onPress={() => decrementBreakTime()}>
+        <TouchableOpacity
+          onPressIn={() => decrementBreakTime()}
+          onPressOut={() => stopTimer()}
+        >
           <View>
             <Text style={styles.controlArrows}>&#8595;</Text>
           </View>
