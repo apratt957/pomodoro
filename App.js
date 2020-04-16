@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Vibration } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Vibration,
+  LayoutAnimation,
+} from 'react-native';
 import { Button } from 'react-native-elements';
 import { useInterval } from './hooks/useInterval';
 import { useFonts } from '@use-expo/font';
@@ -31,11 +37,17 @@ export default function App() {
     }
   });
 
-  const activeSwitch = () => setActive(!active);
+  const activeSwitch = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setActive(!active);
+  };
 
   const resetTime = () => {
     setTime(sessionVal * 60 * 1000);
-    if (active) setActive(!active);
+    if (active) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      setActive(!active);
+    }
     setWorking(true);
   };
 
@@ -58,20 +70,27 @@ export default function App() {
     return (
       <View style={styles.container}>
         {working ? (
-          <Text style={styles.title}>Time To Work!</Text>
+          <View>
+            <Text style={styles.title}>Time To Work!</Text>
+          </View>
         ) : (
-          <Text style={styles.title}>Time To Rest!</Text>
+          <View>
+            <Text style={styles.title}>Time To Rest!</Text>
+          </View>
         )}
         <Timer time={time} />
-        <TimeAdjusters
-          working={working}
-          sessionVal={sessionVal}
-          breakVal={breakVal}
-          incrementSessionTime={incrementSessionTime}
-          decrementSessionTime={decrementSessionTime}
-          incrementBreakTime={incrementBreakTime}
-          decrementBreakTime={decrementBreakTime}
-        />
+        {!active ? (
+          <TimeAdjusters
+            working={working}
+            sessionVal={sessionVal}
+            breakVal={breakVal}
+            incrementSessionTime={incrementSessionTime}
+            decrementSessionTime={decrementSessionTime}
+            incrementBreakTime={incrementBreakTime}
+            decrementBreakTime={decrementBreakTime}
+          />
+        ) : null}
+
         <Button
           titleStyle={styles.startButtonText}
           containerStyle={styles.buttonContainer}

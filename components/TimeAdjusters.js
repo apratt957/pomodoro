@@ -29,11 +29,11 @@ export default function TimeAdjusters({
           </View>
         </TouchableOpacity>
       </View>
-      {working ? (
+      {/* {working ? (
         <Image source={workingImage} style={styles.image} />
       ) : (
         <Image source={restingImage} style={styles.image} />
-      )}
+      )} */}
 
       <View style={styles.controls}>
         <Text style={styles.controlText}>Break</Text>
