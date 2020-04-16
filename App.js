@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Vibration } from 'react-native';
 import { Button } from 'react-native-elements';
 import { useInterval } from './hooks/useInterval';
 import { useFonts } from '@use-expo/font';
@@ -24,6 +24,7 @@ export default function App() {
   }, [sessionVal, breakVal]);
 
   useEffect(() => {
+    if (time === 4000) Vibration.vibrate([1000, 1000, 1000]);
     if (time === 0) {
       working ? setTime(breakVal * 60 * 1000) : setTime(sessionVal * 60 * 1000);
       setWorking(!working);
@@ -94,19 +95,19 @@ const colors = {
   red: '#E83C3C',
   blue: '#388697',
   yellow: '#FFE882',
-  brightYellow: '#FFFD77',
+  pink: '#FFE8E8',
   orange: '#FA8334',
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.yellow,
+    backgroundColor: colors.pink,
     justifyContent: 'center',
   },
   title: {
     fontFamily: 'ConcertOne',
-    fontSize: 40,
+    fontSize: 50,
     alignSelf: 'center',
     marginBottom: 20,
     marginTop: 30,
