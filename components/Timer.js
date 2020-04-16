@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 100,
-    fontFamily: 'Dosis',
+    fontFamily: 'ConcertOne',
   },
 });

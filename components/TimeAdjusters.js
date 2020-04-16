@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 150,
+    marginBottom: 100,
     marginTop: 30,
   },
   controls: {

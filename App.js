@@ -7,14 +7,13 @@ import Timer from './components/Timer';
 import TimeAdjusters from './components/TimeAdjusters';
 
 export default function App() {
-  const [sessionVal, setSessionVal] = useState(1);
+  const [sessionVal, setSessionVal] = useState(25);
   const [breakVal, setBreakVal] = useState(5);
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
   const [working, setWorking] = useState(true);
 
   let [fontsLoaded] = useFonts({
-    BalooBold: require('./fonts/BalooTammudu2-Bold.ttf'),
     ConcertOne: require('./fonts/ConcertOne-Regular.ttf'),
     Dosis: require('./fonts/Dosis-VariableFont_wght.ttf'),
   });
@@ -75,12 +74,14 @@ export default function App() {
           decrementBreakTime={decrementBreakTime}
         />
         <Button
-          titleStyle={styles.button}
+          titleStyle={styles.buttonText}
+          containerStyle={styles.buttonContainer}
           title={active ? 'Pause' : 'Start'}
           onPress={() => activeSwitch()}
         />
         <Button
-          titleStyle={styles.button}
+          titleStyle={styles.buttonText}
+          containerStyle={styles.buttonContainer}
           type="clear"
           title="Reset"
           onPress={() => resetTime()}
@@ -97,14 +98,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    fontFamily: 'ConcertOne',
+    fontSize: 40,
     alignSelf: 'center',
     marginBottom: 20,
-    fontSize: 40,
-    fontFamily: 'ConcertOne',
+    marginTop: 30,
   },
-  button: {
+  buttonText: {
     fontFamily: 'ConcertOne',
     fontSize: 30,
     marginBottom: 10,
+  },
+  buttonContainer: {
+    width: 100,
+    alignSelf: 'center',
   },
 });
