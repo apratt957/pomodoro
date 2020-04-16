@@ -15,7 +15,6 @@ export default function App() {
 
   let [fontsLoaded] = useFonts({
     ConcertOne: require('./fonts/ConcertOne-Regular.ttf'),
-    Dosis: require('./fonts/Dosis-VariableFont_wght.ttf'),
   });
 
   useInterval(() => setTime(time - 1000), active ? 1000 : null);
