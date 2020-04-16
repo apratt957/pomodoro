@@ -14,7 +14,7 @@ export default function App() {
   const [working, setWorking] = useState(true);
 
   let [fontsLoaded] = useFonts({
-    ConcertOne: require('./fonts/ConcertOne-Regular.ttf'),
+    ConcertOne: require('./assets/fonts/ConcertOne-Regular.ttf'),
   });
 
   useInterval(() => setTime(time - 1000), active ? 1000 : null);
@@ -25,9 +25,7 @@ export default function App() {
 
   useEffect(() => {
     if (time === 0) {
-      working === true
-        ? setTime(breakVal * 60 * 1000)
-        : setTime(sessionVal * 60 * 1000);
+      working ? setTime(breakVal * 60 * 1000) : setTime(sessionVal * 60 * 1000);
       setWorking(!working);
     }
   });
@@ -65,6 +63,7 @@ export default function App() {
         )}
         <Timer time={time} />
         <TimeAdjusters
+          working={working}
           sessionVal={sessionVal}
           breakVal={breakVal}
           incrementSessionTime={incrementSessionTime}
@@ -73,13 +72,14 @@ export default function App() {
           decrementBreakTime={decrementBreakTime}
         />
         <Button
-          titleStyle={styles.buttonText}
+          titleStyle={styles.startButtonText}
           containerStyle={styles.buttonContainer}
+          buttonStyle={styles.startButton}
           title={active ? 'Pause' : 'Start'}
           onPress={() => activeSwitch()}
         />
         <Button
-          titleStyle={styles.buttonText}
+          titleStyle={styles.resetButtonText}
           containerStyle={styles.buttonContainer}
           type="clear"
           title="Reset"
@@ -90,10 +90,18 @@ export default function App() {
   }
 }
 
+const colors = {
+  red: '#E83C3C',
+  blue: '#388697',
+  yellow: '#FFE882',
+  brightYellow: '#FFFD77',
+  orange: '#FA8334',
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.yellow,
     justifyContent: 'center',
   },
   title: {
@@ -103,10 +111,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 30,
   },
-  buttonText: {
+  startButtonText: {
     fontFamily: 'ConcertOne',
     fontSize: 30,
     marginBottom: 10,
+  },
+  resetButtonText: {
+    fontFamily: 'ConcertOne',
+    color: colors.orange,
+    fontSize: 30,
+    marginBottom: 10,
+  },
+  startButton: {
+    borderRadius: 30,
   },
   buttonContainer: {
     width: 100,

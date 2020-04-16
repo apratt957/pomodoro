@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 
 export default function TimeAdjusters({
+  working,
   sessionVal,
   breakVal,
   incrementSessionTime,
@@ -9,6 +10,9 @@ export default function TimeAdjusters({
   incrementBreakTime,
   decrementBreakTime,
 }) {
+  const workingImage = require('../assets/art/working.png');
+  const restingImage = require('../assets/art/resting.png');
+
   return (
     <View style={styles.container}>
       <View style={styles.controls}>
@@ -25,6 +29,12 @@ export default function TimeAdjusters({
           </View>
         </TouchableOpacity>
       </View>
+      {working ? (
+        <Image source={workingImage} style={styles.image} />
+      ) : (
+        <Image source={restingImage} style={styles.image} />
+      )}
+
       <View style={styles.controls}>
         <Text style={styles.controlText}>Break</Text>
         <TouchableOpacity onPress={() => incrementBreakTime()}>
@@ -48,7 +58,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 100,
+    marginBottom: 60,
     marginTop: 30,
   },
   controls: {
@@ -60,5 +70,9 @@ const styles = StyleSheet.create({
   },
   controlArrows: {
     fontSize: 40,
+  },
+  image: {
+    height: 270,
+    width: 190,
   },
 });
