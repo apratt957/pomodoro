@@ -112,7 +112,7 @@ export default function App() {
             true: styles.switchContainer.color,
           }}
           onValueChange={() => changeTheme()}
-          value={isEnabled}
+          value={!isEnabled}
         />
         {working ? (
           <View>
