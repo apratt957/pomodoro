@@ -1,12 +1,9 @@
 {
   "expo": {
-    "name": "pomodoro",
+    "name": "Minimal Pomodoro Timer",
+    "description": "A pomodoro work timer without all the fuss. You get light mode, you get dark mode, you get to pick how long you work and take breaks for. What?? What do you mean you want stat tracking so you can compare yourself to everyone else??? N- No!",
     "slug": "pomodoro",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     }
