@@ -9,16 +9,27 @@ import {
 import { Button } from 'react-native-elements';
 import { useInterval } from './hooks/useInterval';
 import { useFonts } from '@use-expo/font';
+import { Audio } from 'expo-av';
 import Timer from './components/Timer';
 import TimeAdjusters from './components/TimeAdjusters';
 
 export default function App() {
-  const [sessionVal, setSessionVal] = useState(25);
+  const [sessionVal, setSessionVal] = useState(0.1);
   const [breakVal, setBreakVal] = useState(5);
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
   const [working, setWorking] = useState(true);
   const [timer, setTimer] = useState(null);
+
+  const soundObject = new Audio.Sound();
+  const loadAndPlayAlert = async () => {
+    try {
+      await soundObject.loadAsync(require('./assets/sounds/alert.mp3'));
+      await soundObject.playAsync();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   let [fontsLoaded] = useFonts({
     ConcertOne: require('./assets/fonts/ConcertOne-Regular.ttf'),
@@ -33,6 +44,7 @@ export default function App() {
   useEffect(() => {
     if (time === 4000) Vibration.vibrate([1000, 1000, 1000]);
     if (time === 0) {
+      loadAndPlayAlert();
       working ? setTime(breakVal * 60 * 1000) : setTime(sessionVal * 60 * 1000);
       setWorking(!working);
     }
@@ -110,7 +122,6 @@ export default function App() {
         <Button
           titleStyle={styles.startButtonText}
           containerStyle={styles.buttonContainer}
-          // buttonStyle={styles.startButton}
           type="clear"
           title={active ? 'Pause' : 'Start'}
           onPress={() => activeSwitch()}

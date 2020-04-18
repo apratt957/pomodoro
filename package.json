@@ -10,6 +10,7 @@
   "dependencies": {
     "@use-expo/font": "^2.0.0",
     "expo": "~37.0.3",
+    "expo-av": "~8.1.0",
     "moment": "^2.24.0",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
