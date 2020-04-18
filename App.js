@@ -116,11 +116,11 @@ export default function App() {
         />
         {working ? (
           <View>
-            <Text style={styles.title}>Time To Work!</Text>
+            <Text style={styles.title}>Time To Work</Text>
           </View>
         ) : (
           <View>
-            <Text style={styles.title}>Time To Rest!</Text>
+            <Text style={styles.title}>Time To Rest</Text>
           </View>
         )}
         <Timer time={time} theme={theme} />
