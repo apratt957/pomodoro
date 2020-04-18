@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Vibration,
-  LayoutAnimation,
-} from 'react-native';
+import { View, Text, Vibration, LayoutAnimation, Switch } from 'react-native';
 import { Button } from 'react-native-elements';
+import { useTheme } from 'react-native-themed-styles';
 import { useInterval } from './hooks/useInterval';
 import { useFonts } from '@use-expo/font';
 import { Audio } from 'expo-av';
+import { styleSheetFactory } from './hooks/themes';
 import Timer from './components/Timer';
 import TimeAdjusters from './components/TimeAdjusters';
 
@@ -20,6 +16,8 @@ export default function App() {
   const [active, setActive] = useState(false);
   const [working, setWorking] = useState(true);
   const [timer, setTimer] = useState(null);
+  const [theme, setTheme] = useState('dark');
+  const [isEnabled, setIsEnabled] = useState('false');
 
   const soundObject = new Audio.Sound();
   const loadAndPlayAlert = async () => {
@@ -93,11 +91,29 @@ export default function App() {
     }
   };
 
+  const changeTheme = () => {
+    theme === 'dark' ? setTheme('light') : setTheme('dark');
+    setIsEnabled((prevState) => !prevState);
+  };
+
+  const [styles] = useTheme(themedStyles, theme);
+
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   } else {
     return (
       <View style={styles.container}>
+        <Switch
+          style={styles.switchContainer}
+          thumbColor={styles.resetButtonText.color}
+          ios_backgroundColor={styles.switchContainer.color}
+          trackColor={{
+            false: styles.switchContainer.color,
+            true: styles.switchContainer.color,
+          }}
+          onValueChange={() => changeTheme()}
+          value={isEnabled}
+        />
         {working ? (
           <View>
             <Text style={styles.title}>Time To Work!</Text>
@@ -107,7 +123,7 @@ export default function App() {
             <Text style={styles.title}>Time To Rest!</Text>
           </View>
         )}
-        <Timer time={time} />
+        <Timer time={time} theme={theme} />
         {!active ? (
           <TimeAdjusters
             sessionVal={sessionVal}
@@ -117,6 +133,7 @@ export default function App() {
             incrementBreakTime={incrementBreakTime}
             decrementBreakTime={decrementBreakTime}
             stopTimer={stopTimer}
+            theme={theme}
           />
         ) : null}
         <Button
@@ -138,22 +155,18 @@ export default function App() {
   }
 }
 
-const colors = {
-  red: '#E83C3C',
-  blue: '#0B2033',
-  yellow: '#FFE882',
-  pink: '#FFE8E8',
-  orange: '#FA8334',
-};
-
-const styles = StyleSheet.create({
+const themedStyles = styleSheetFactory((theme) => ({
   container: {
     flex: 1,
-    backgroundColor: colors.blue,
+    backgroundColor: theme.backgroundColor,
     justifyContent: 'center',
   },
+  switchContainer: {
+    alignSelf: 'center',
+    color: theme.textColor,
+  },
   title: {
-    color: colors.pink,
+    color: theme.textColor,
     fontFamily: 'ConcertOne',
     fontSize: 50,
     alignSelf: 'center',
@@ -161,14 +174,14 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   startButtonText: {
-    color: colors.pink,
+    color: theme.textColor,
     fontFamily: 'ConcertOne',
     fontSize: 30,
     marginBottom: 10,
   },
   resetButtonText: {
     fontFamily: 'ConcertOne',
-    color: colors.orange,
+    color: theme.resetColor,
     fontSize: 30,
     marginBottom: 10,
   },
@@ -179,4 +192,4 @@ const styles = StyleSheet.create({
     width: 100,
     alignSelf: 'center',
   },
-});
+}));

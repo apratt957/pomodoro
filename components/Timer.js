@@ -1,8 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import moment from 'moment';
+import { styleSheetFactory } from '../hooks/themes';
+import { useTheme } from 'react-native-themed-styles';
 
-export default function Timer({ time }) {
+export default function Timer({ time, theme }) {
+  const [styles] = useTheme(themedStyles, theme);
+
   return (
     <View style={styles.container}>
       {time < 600000 ? (
@@ -22,22 +26,14 @@ export default function Timer({ time }) {
   );
 }
 
-const colors = {
-  red: '#E83C3C',
-  blue: '#0B2033',
-  yellow: '#FFE882',
-  pink: '#FFE8E8',
-  orange: '#FA8334',
-};
-
-const styles = StyleSheet.create({
+const themedStyles = styleSheetFactory((theme) => ({
   container: {
     display: 'flex',
     alignItems: 'center',
   },
   time: {
-    color: colors.pink,
+    color: theme.textColor,
     fontSize: 100,
     fontFamily: 'ConcertOne',
   },
-});
+}));

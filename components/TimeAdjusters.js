@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { styleSheetFactory } from '../hooks/themes';
+import { useTheme } from 'react-native-themed-styles';
 
 export default function TimeAdjusters({
   sessionVal,
@@ -9,7 +11,10 @@ export default function TimeAdjusters({
   incrementBreakTime,
   decrementBreakTime,
   stopTimer,
+  theme,
 }) {
+  const [styles] = useTheme(themedStyles, theme);
+
   return (
     <View style={styles.container}>
       <View style={styles.controls}>
@@ -56,15 +61,7 @@ export default function TimeAdjusters({
   );
 }
 
-const colors = {
-  red: '#E83C3C',
-  blue: '#0B2033',
-  yellow: '#FFE882',
-  pink: '#FFE8E8',
-  orange: '#FA8334',
-};
-
-const styles = StyleSheet.create({
+const themedStyles = styleSheetFactory((theme) => ({
   container: {
     display: 'flex',
     flexDirection: 'row',
@@ -76,16 +73,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   controlText: {
-    color: colors.pink,
+    color: theme.textColor,
     fontSize: 30,
     fontFamily: 'ConcertOne',
   },
   controlArrows: {
-    color: colors.pink,
+    color: theme.textColor,
     fontSize: 40,
   },
   image: {
     height: 270,
     width: 190,
   },
-});
+}));
