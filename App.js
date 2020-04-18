@@ -14,7 +14,7 @@ import Timer from './components/Timer';
 import TimeAdjusters from './components/TimeAdjusters';
 
 export default function App() {
-  const [sessionVal, setSessionVal] = useState(0.1);
+  const [sessionVal, setSessionVal] = useState(25);
   const [breakVal, setBreakVal] = useState(5);
   const [time, setTime] = useState(sessionVal * 60 * 1000);
   const [active, setActive] = useState(false);
