@@ -16,7 +16,7 @@ export default function App() {
   const [active, setActive] = useState(false);
   const [working, setWorking] = useState(true);
   const [timer, setTimer] = useState(null);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
   const [isEnabled, setIsEnabled] = useState('false');
 
   const soundObject = new Audio.Sound();
